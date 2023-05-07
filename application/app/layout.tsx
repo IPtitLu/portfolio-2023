@@ -1,7 +1,39 @@
 import './globals.css'
-import { Inter } from 'next/font/google'
+import { Nunito } from 'next/font/google'
 
-const inter = Inter({ subsets: ['latin'] })
+const nunito = Nunito({
+  subsets: ['latin'],
+  // this will be the css variable
+  variable: '--font-sans',
+});
+
+import localFont from 'next/font/local'
+
+const MontserratAlt1 = localFont({
+  src: [
+    {
+      path: './webfonts/MontserratAlt1-Medium.woff2',
+      weight: '400',
+      style: 'normal',
+    },
+    {
+      path: './webfonts/MontserratAlt1-Bold.woff2',
+      weight: '700',
+      style: 'normal',
+    },
+    {
+      path: './webfonts/MontserratAlt1-SemiBold.woff2',
+      weight: '600',
+      style: 'normal',
+    },
+    {
+      path: './webfonts/MontserratAlt1-Regular.woff2',
+      weight: '300',
+      style: 'normal',
+    },
+  ],
+  variable: '--font-MontserratAlt1'
+})
 
 export const metadata = {
   title: 'Create Next App',
@@ -14,8 +46,8 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en">
-      <body className={inter.className}>{children}</body>
+    <html lang="en" className={`${MontserratAlt1.variable}`}>
+      <body className={nunito.className}>{children}</body>
     </html>
   )
 }
