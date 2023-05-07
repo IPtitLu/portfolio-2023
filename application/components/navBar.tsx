@@ -4,10 +4,10 @@ import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import { motion } from "framer-motion";
 
 const navigation = [
-    { name: 'Moi', href: '#', class: 'text-lg hover:text-orange hover:border-b-2 border-0 border-orange' },
-    { name: 'Skills', href: '#', class: 'ml-4 mr-2 text-lg hover:text-orange hover:border-b-2 border-0 border-orange' },
-    { name: 'Portfolio', href: '#', class: 'ml-2 mr-4 text-lg hover:text-orange hover:border-b-2 border-0 border-orange' },
-    { name: 'Expériences', href: '#', class: 'text-lg hover:text-orange hover:border-b-2 border-0 border-orange' },
+    { name: 'Moi', href: '#', class: 'text-xl hover:text-orange hover:border-b-2 border-0 border-orange' },
+    { name: 'Skills', href: '#', class: 'ml-4 mr-2 text-xl hover:text-orange hover:border-b-2 border-0 border-orange' },
+    { name: 'Portfolio', href: '#', class: 'ml-2 mr-4 text-xl hover:text-orange hover:border-b-2 border-0 border-orange' },
+    { name: 'Expériences', href: '#', class: 'text-xl hover:text-orange hover:border-b-2 border-0 border-orange' },
 ]
 
 function classNames(...classes) {
