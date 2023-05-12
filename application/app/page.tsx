@@ -1,16 +1,22 @@
 'use client'
 
+import { useState } from 'react'
 import Image from 'next/image'
+import Link from 'next/link';
 import { motion } from "framer-motion"
-import { FaArrowDown } from 'react-icons/fa'
-import Navbar from '../components/navBar'
+import { FaArrowDown, FaScroll, FaLaptop } from 'react-icons/fa'
+import NavigationBar from '../components/navigationBar'
+import ScrollFormations from '../components/ScrollFormations'
+
 import WaveBottom from '../public/wave-2.svg'
 
 export default function Home() {
+  const [activeSection, setActiveSection] = useState(0);
+
   return (
-    <div className='w-full bg-light-dark'>
-      <Navbar />
-      <div className='w-full h-full pb-[-50px] bg-[url("/bg1.svg")] bg-cover bg-right lg:bg-center'>
+    <div className='w-full bg-dark relative'>
+      <NavigationBar />
+      <section id='home' className='w-full h-full pb-[-50px] bg-[url("/bg1.svg")] bg-cover bg-right lg:bg-center'>
         <div
           className='max-w-screen-lg mx-auto flex flex-col'
         >
@@ -52,15 +58,38 @@ export default function Home() {
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 3 }}
           >
-            <a href='' className="animate-bounce flex justify-center">
+            <Link href='#about' className="animate-bounce flex justify-center">
               <div className=' hover:ring-4 hover:ring-orange rounded-full ease-out duration-200'>
                 <FaArrowDown size={32} className='m-2' />
               </div>
-            </a>
+            </Link>
           </motion.div>
         </div>
         <Image src={WaveBottom} alt={""} className='w-full' />
-      </div>
-    </div >
+      </section>
+      <section id='about' className='w-full h-full pb-[-50px] bg-dark'>
+        <div
+          className='max-w-screen-lg mx-auto flex flex-col mb-10 items-center'
+        >
+          <div className='w-fit flex flex-col lg:flex-row justify-center items-center mb-10 bg-light-dark rounded-xl py-2 px-2'>
+            <h3
+              className={`font-montserrat text-4xl font-bold mr-0 lg:mr-4 cursor-pointer inline-flex items-center justify-center py-2 px-2 w-fit rounded-xl ease-in-out duration-200
+               ${activeSection === 0 ? "text-white bg-white/25" : "text-white/50"}`}
+              onClick={() => setActiveSection(0)}
+            >
+              Compétences
+            </h3>
+            <h3
+              className={`font-montserrat text-4xl font-bold ml-0 lg:ml-4 cursor-pointer inline-flex items-center justify-center text-center  py-2 px-2 w-fit rounded-xl ease-in-out duration-200
+               ${activeSection === 1 ? "text-white bg-white/25" : "text-white/50"}`}
+              onClick={() => setActiveSection(1)}
+            >
+              Formations & Expériences
+            </h3>
+          </div>
+          <ScrollFormations active={activeSection == 1 ? true : false} />
+        </div>
+      </section>
+    </div>
   )
 }
