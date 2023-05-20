@@ -12,7 +12,7 @@ const navigation = [
     { name: 'Contact', href: '#contact', class: 'text-xl hover:text-orange hover:border-b-2 border-0 border-orange', activeClass: 'ml-4 mr-2 text-xl border-b-2 border-orange hover:text-orange' },
 ]
 
-function classNames(...classes) {
+function classNames(...classes: string[]) {
     return classes.filter(Boolean).join(' ')
 }
 

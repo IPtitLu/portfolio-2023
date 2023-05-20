@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useEffect } from "react"; 
 import { motion, AnimatePresence } from "framer-motion";
 import SkillsContent from "./skillsContent";
 import { SetStateAction, Dispatch } from 'react';
@@ -18,10 +18,17 @@ type Props = {
 const Accordeon = (props: Props) => {
     const isOpen = props.id === props.expanded;
 
-    // By using `AnimatePresence` to mount and unmount the contents, we can animate
-    // them in and out while also only rendering the contents of open accordions
+    useEffect(() => {
+        console.log("id : ", props.id)
+    }, []);
+
     return (
-        <>
+        <motion.div 
+            key={String(props.id)}
+            initial={{ opacity: 0, scale: 0.5 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.5 }}
+        >
             <motion.header
                 initial={false}
                 className="px-4 py-8 drop-shadow-xl hover:ring hover:ring-orange ease-out duration-200"
@@ -46,7 +53,6 @@ const Accordeon = (props: Props) => {
             <AnimatePresence initial={false}>
                 {isOpen && (
                     <motion.section
-                        key="content"
                         initial="collapsed"
                         animate="open"
                         exit="collapsed"
@@ -60,7 +66,7 @@ const Accordeon = (props: Props) => {
                     </motion.section>
                 )}
             </AnimatePresence>
-        </>
+        </motion.div>
     );
 };
 
