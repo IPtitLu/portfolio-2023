@@ -1,4 +1,9 @@
-export default function FilterBar({ handleClick, active }) {
+interface FilterBarProps {
+    handleClick: (item: string) => void;
+    active: string;
+  }
+
+export default function FilterBar({ handleClick, active }: FilterBarProps) {
     const items = ["Tous", "Front-end", "Back-end", "Autre"];
   
     return (

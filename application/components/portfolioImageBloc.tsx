@@ -11,7 +11,7 @@ export default function PortfolioImageBloc() {
   const [active, setActive] = useState("Tous");
   const [isLoading, setIsLoading] = useState(true);
 
-  const handlecategorieClick = (categorie) => {
+  const handlecategorieClick = (categorie: string) => {
     if (categorie === active) return;
     setActive(categorie);
     setDisplayData([]);
