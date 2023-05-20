@@ -1,0 +1,8 @@
+[    
+    {    "id": 1,    "title": "Html - Css - Js",   "categorie": "Front-end",    "imagePath": "/company-finder.png",    "content": "content"  },
+    {    "id": 2,    "title": "React - Tailwind",   "categorie": "Back-end",    "imagePath": "/company-finder.png",    "content": "content"  },  
+    {    "id": 3,    "title": "NextJS",   "categorie": "Autre",    "imagePath": "/company-finder.png",    "content": "content"  },
+    {    "id": 4,    "title": "Html - Css - Js",   "categorie": "Front-end",    "imagePath": "/company-finder.png",    "content": "content"  },
+    {    "id": 5,    "title": "React - Tailwind",   "categorie": "Back-end",    "imagePath": "/company-finder.png",    "content": "content"  },  
+    {    "id": 6,    "title": "NextJS",   "categorie": "Autre",    "imagePath": "/company-finder.png",    "content": "content"  }
+]

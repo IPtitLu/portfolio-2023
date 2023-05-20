@@ -1,17 +1,19 @@
 'use client'
 
-import { Suspense, useState, useEffect } from 'react'
-import Image from 'next/image'
+import { Suspense, useState, useEffect } from 'react';
+import Image from 'next/image';
 import Link from 'next/link';
-import { motion } from "framer-motion"
-import { FaArrowDown, FaScroll, FaLaptop } from 'react-icons/fa'
+import { motion } from "framer-motion";
+import { FaArrowDown, FaScroll, FaLaptop } from 'react-icons/fa';
 import { useInView } from "react-intersection-observer";
-import NavigationBar from '../components/navigationBar'
-import ScrollFormations from '../components/ScrollFormations'
-import SkillsAccordeon from '../components/skillsAccordeonBloc'
-import { Loader } from '../components/loader'
+import NavigationBar from '../components/navigationBar';
+import ScrollFormations from '../components/ScrollFormations';
+import SkillsAccordeon from '../components/skillsAccordeonBloc';
+import PortfolioImageBloc from '../components/portfolioImageBloc';
+import { Loader } from '../components/loader';
 
-import WaveBottom from '../public/wave-2.svg'
+import WaveBottom from '../public/wave-2.svg';
+import WaveBottomLight from '../public/wave-2-light.svg';
 
 export default function Home() {
   const [activeSection, setActiveSection] = useState(0);
@@ -31,6 +33,14 @@ export default function Home() {
       }, 1000);
     }
   }, [sectionAboutInView, sectionAboutLoaded]);
+
+  useEffect(() => {
+    if (sectionPortfolioInView && !sectionPortfolioLoaded) {
+      setTimeout(() => {
+        setSectionPortfolioLoaded(true)
+      }, 1000);
+    }
+  }, [sectionPortfolioInView, sectionPortfolioLoaded]);
 
   return (
     <div className='w-full bg-dark relative'>
@@ -120,8 +130,28 @@ export default function Home() {
                 <SkillsAccordeon activeSection={activeSection} />
               </motion.div>
             ) : (
-              <Loader />
+              <div className='h-screen'>
+                <Loader />
+              </div>
             )}
+            <Image src={WaveBottomLight} alt={""} className='w-full' />
+          </section>
+          <section id='portfolio' className='w-full h-full pb-[-50px] bg-light-dark' ref={sectionPortfolioRef}>
+            {sectionPortfolioLoaded ? (
+              <motion.div 
+                className='max-w-screen-lg bg-light-dark mx-auto flex flex-col mb-10 items-center'
+                initial={{ opacity: 0, scale: 0.5 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.5 }}
+              >
+                <PortfolioImageBloc />
+              </motion.div>
+            ) : (
+              <div className='h-full'>
+                <Loader />
+              </div>
+            )}
+            <Image src={WaveBottom} alt={""} className='w-full' />
           </section>
       </Suspense>
     </div>
