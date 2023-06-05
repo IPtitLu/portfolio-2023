@@ -2,8 +2,8 @@
 
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
-import { Disclosure, Menu, Transition } from '@headlessui/react'
-import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
+import { Disclosure } from '@headlessui/react'
+import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 import { motion } from "framer-motion";
 
 const navigation = [
@@ -42,7 +42,7 @@ export default function navigationBar() {
                             </div>
                             <div className="flex flex-1 items-center justify-center lg:items-stretch lg:justify-between">
                                 <Link
-                                    href="#home"
+                                    href="/"
                                 >
                                     <h1 className="text-4xl font-montserrat text-right lg:text-center lg:mb-0">Lucas <span className="text-orange font-montserrat">Perez</span></h1>
                                 </Link>
@@ -50,23 +50,23 @@ export default function navigationBar() {
                                     <li>
                                         <Link
                                             href="#about"
-                                            className={pathname === '/#about' ? "ml-4 mr-2 text-xl border-b-2 border-orange hover:text-orange" : "ml-4 mr-2 text-xl hover:text-orange hover:border-b-2 border-0 border-orange"}
+                                            className={pathname === '/' ? "ml-4 mr-2 text-xl border-b-2 border-orange hover:text-orange" : "ml-4 mr-2 text-xl hover:text-orange hover:border-b-2 border-0 border-orange"}
                                         >
                                             A propos
                                         </Link>
                                     </li>
                                     <li>
                                         <Link
-                                            href="#portfolio"
-                                            className={pathname === '/#portfolio' ? "ml-4 mr-2 text-xl border-b-2 border-orange hover:text-orange" : "ml-2 mr-4 text-xl hover:text-orange hover:border-b-2 border-0 border-orange"}
+                                            href="projets"
+                                            className={pathname === '/projets' ? "ml-4 mr-2 text-xl border-b-2 border-orange hover:text-orange" : "ml-2 mr-4 text-xl hover:text-orange hover:border-b-2 border-0 border-orange"}
                                         >
                                             Portfolio
                                         </Link>
                                     </li>
                                     <li>
                                         <Link
-                                            href="#contact"
-                                            className={pathname === '/#contact' ? "ml-4 mr-2 text-xl border-b-2 border-orange hover:text-orange" : "text-xl hover:text-orange hover:border-b-2 border-0 border-orange"}
+                                            href="contact"
+                                            className={pathname === '/contact' ? "ml-4 mr-2 text-xl border-b-2 border-orange hover:text-orange" : "text-xl hover:text-orange hover:border-b-2 border-0 border-orange"}
                                         >
                                             Contact
                                         </Link>
