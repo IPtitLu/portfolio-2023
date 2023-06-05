@@ -4,16 +4,14 @@ import { Suspense, useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { motion } from "framer-motion";
-import { FaArrowDown, FaScroll, FaLaptop } from 'react-icons/fa';
+import { FaArrowDown } from 'react-icons/fa';
 import { useInView } from "react-intersection-observer";
 import NavigationBar from '../components/navigationBar';
-import ScrollFormations from '../components/ScrollFormations';
-import SkillsAccordeon from '../components/skillsAccordeonBloc';
-import PortfolioImageBloc from '../components/portfolioImageBloc';
+import Footer from '../components/footer';
 import { Loader } from '../components/loader';
+import { FaGithub, FaLinkedinIn } from "react-icons/fa";
 
 import WaveBottom from '../public/wave-2.svg';
-import WaveBottomLight from '../public/wave-2-light.svg';
 
 export default function Home() {
   const [activeSection, setActiveSection] = useState(0);
@@ -28,19 +26,9 @@ export default function Home() {
   
   useEffect(() => {
     if (sectionAboutInView && !sectionAboutLoaded) {
-      setTimeout(() => {
         setSectionAboutLoaded(true)
-      }, 1000);
     }
   }, [sectionAboutInView, sectionAboutLoaded]);
-
-  useEffect(() => {
-    if (sectionPortfolioInView && !sectionPortfolioLoaded) {
-      setTimeout(() => {
-        setSectionPortfolioLoaded(true)
-      }, 1000);
-    }
-  }, [sectionPortfolioInView, sectionPortfolioLoaded]);
 
   return (
     <div className='w-full bg-dark relative'>
@@ -50,7 +38,7 @@ export default function Home() {
           <NavigationBar />
         </Suspense>
         <Suspense fallback={Loader()}>
-            <section id='home' className='w-full h-full pb-[-50px] bg-[url("/bg1.svg")] bg-cover bg-right lg:bg-center'>
+            <section id='home' className='w-full h-full pb-[-50px] bg-[url("/bg1.svg")] bg-cover bg-right lg:bg-center overflow-hidden'>
             <div
               className='max-w-screen-lg mx-auto flex flex-col'
             >
@@ -68,8 +56,23 @@ export default function Home() {
                     passionné par l'innovation, capable de
                     traduire les idées en <span className='text-orange'>réalité numérique</span> à
                     travers une <span className='text-orange'>expertise</span> en front et back.</p>
-                  <div className='w-full flex justify-center lg:justify-start'>
-                    <a href='#contact' className='border-2 border-orange rounded-md py-2 px-4 hover:bg-orange hover:text-dark ease-in-out duration-300'><span className='text-2xl font-semibold'>Me contacter</span></a>
+                  <div className='w-full flex justify-center items-center lg:justify-start'>
+                    <Link
+                      href="contact"
+                      className={"border-2 border-orange rounded-md py-2 px-4 hover:bg-orange hover:text-dark ease-in-out duration-300"}
+                    >
+                      <span className='text-2xl font-semibold'>Me contacter</span>
+                    </Link>
+                    <Link href="https://github.com/IPtitLu">
+                      <FaGithub
+                          className="w-10 h-auto mx-6 hover:fill-orange"
+                      />
+                    </Link>
+                    <Link href="https://www.linkedin.com/in/lucas-perez-71994b17a/">
+                      <FaLinkedinIn
+                            className="w-10 h-auto hover:fill-orange"
+                        />
+                    </Link>
                   </div>
                 </motion.div>
                 <motion.div className='flex-1 flex justify-center mb-20 lg:mb-0 lg:justify-end items-center'
@@ -102,58 +105,24 @@ export default function Home() {
             <Image src={WaveBottom} alt={""} className='w-full' />
           </section>
         </Suspense>
-          <section id='about' className='w-full h-full pb-[-50px] bg-dark' ref={sectionAboutRef}>
-            {sectionAboutLoaded ? (
-              <motion.div 
-                className='max-w-screen-lg mx-auto flex flex-col mb-10 items-center'
-                initial={{ opacity: 0, scale: 0.5 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.5 }}
-              >
-                <div className='w-fit flex flex-col lg:flex-row justify-center items-center mb-10 bg-light-dark rounded-xl py-2 px-2'>
-                  <h3
-                    className={`font-montserrat text-4xl font-bold mr-0 lg:mr-4 cursor-pointer inline-flex items-center justify-center hover:bg-white/25 py-2 px-2 w-fit rounded-xl ease-in-out duration-200
-                  ${activeSection === 0 ? "text-white bg-white/25" : "text-white/50"}`}
-                    onClick={() => setActiveSection(0)}
-                  >
-                    Compétences
-                  </h3>
-                  <h3
-                    className={`font-montserrat text-4xl font-bold ml-0 lg:ml-4 cursor-pointer inline-flex items-center justify-center text-center hover:bg-white/25 py-2 px-2 w-fit rounded-xl ease-in-out duration-200
-                  ${activeSection === 1 ? "text-white bg-white/25" : "text-white/50"}`}
-                    onClick={() => setActiveSection(1)}
-                  >
-                    Formations & Expériences
-                  </h3>
-                </div>
-                <ScrollFormations active={activeSection == 1 ? true : false} />
-                <SkillsAccordeon activeSection={activeSection} />
-              </motion.div>
-            ) : (
-              <div className='h-screen'>
-                <Loader />
-              </div>
-            )}
-            <Image src={WaveBottomLight} alt={""} className='w-full' />
-          </section>
-          <section id='portfolio' className='w-full h-full pb-[-50px] bg-light-dark' ref={sectionPortfolioRef}>
-            {sectionPortfolioLoaded ? (
-              <motion.div 
-                className='max-w-screen-lg bg-light-dark mx-auto flex flex-col mb-10 items-center'
-                initial={{ opacity: 0, scale: 0.5 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.5 }}
-              >
-                <PortfolioImageBloc />
-              </motion.div>
-            ) : (
-              <div className='h-full'>
-                <Loader />
-              </div>
-            )}
-            <Image src={WaveBottom} alt={""} className='w-full' />
-          </section>
       </Suspense>
+      <section id='about' className='w-full h-full pb-[-50px] bg-dark' ref={sectionAboutRef}>
+          {sectionAboutLoaded ? (
+            <motion.div 
+              className='max-w-screen-lg mx-auto flex flex-col mb-10 items-center'
+              initial={{ opacity: 0, scale: 0.5 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.5 }}
+            >
+              <div>Hello</div>
+            </motion.div>
+          ) : (
+            <div className='h-screen'>
+              <Loader />
+            </div>
+          )}
+        </section>
+        <Footer />
     </div>
   )
 }
