@@ -173,7 +173,7 @@ export default function Home() {
                 </div>
                 <div className={activeSection === 1 ? ' hidden' : 'w-full flex justify-center'}>
                     <ul className='w-full flex flex-col justify-center items-center'>
-                        {dataExperiences.slice(0, visibleCount).map((item: props, index) => (
+                        {dataExperiences.map((item: props, index) => (
                           <motion.li 
                             key={item.id} 
                             className='w-4/5 flex flex-row mb-6'
