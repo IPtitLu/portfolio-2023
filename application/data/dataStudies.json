@@ -1,0 +1,6 @@
+[    
+    {    "id": 5,    "date": 2019,   "title": "Baccalauréat",    "localisation": "/vercel.svg",  "structure": "company",  "content": "content"  },
+    {    "id": 4,    "date": 2021,   "title": "BTS SIO - option SLAM",    "localisation": "/vercel.svg",  "structure": "company",  "content": "content"  },  
+    {    "id": 6,    "date": 2022,   "title": "Bachelor Développeur Web",    "localisation": "/vercel.svg",  "structure": "company",  "content": "content"  },
+    {    "id": 6,    "date": 2023,   "title": "Master Expert Développeur Web",    "localisation": "/vercel.svg",  "structure": "company",  "content": "content"  }
+]
