@@ -3,13 +3,14 @@
 import { Suspense } from 'react';
 import NavigationBar from '../../components/navigationBar';
 import { Loader } from '../../components/loader';
+import Footer from '@/components/footer';
 
 
 export default function Contact() {
     return (
         <div className='w-full bg-dark relative'>
             <Suspense fallback={Loader()}>
-                
+
                 <Suspense fallback={Loader()}>
                     <NavigationBar />
                 </Suspense>
@@ -19,7 +20,7 @@ export default function Contact() {
                     </section>
                 </Suspense>
             </Suspense>
+            <Footer />
         </div>
     )
-  }
-  
+}
