@@ -1,6 +1,34 @@
 [    
-    {    "id": 5,    "date": 2019,   "title": "Baccalauréat",    "localisation": "/vercel.svg",  "structure": "company",  "content": "content"  },
-    {    "id": 4,    "date": 2021,   "title": "BTS SIO - option SLAM",    "localisation": "/vercel.svg",  "structure": "company",  "content": "content"  },  
-    {    "id": 6,    "date": 2022,   "title": "Bachelor Développeur Web",    "localisation": "/vercel.svg",  "structure": "company",  "content": "content"  },
-    {    "id": 6,    "date": 2023,   "title": "Master Expert Développeur Web",    "localisation": "/vercel.svg",  "structure": "company",  "content": "content"  }
+    {
+        "id": 6,
+        "date": 2023,
+        "title": "Master Expert Développeur Web",
+        "localisation": "/vercel.svg",
+        "structure": "company",
+        "content": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged."
+    },
+    {
+        "id": 6,
+        "date": 2022,
+        "title": "Bachelor Développeur Web",
+        "localisation": "/vercel.svg",
+        "structure": "company",
+        "content": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged."
+    },
+    {
+        "id": 4,
+        "date": 2021,
+        "title": "BTS SIO - option SLAM",
+        "localisation": "/vercel.svg",
+        "structure": "company",
+        "content": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged."
+    },  
+    {
+        "id": 5,
+        "date": 2019,
+        "title": "Baccalauréat",
+        "localisation": "/vercel.svg",
+        "structure": "company",
+        "content": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged."
+    }
 ]

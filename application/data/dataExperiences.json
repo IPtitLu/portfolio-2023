@@ -1,6 +1,56 @@
 [    
-    {    "id": 5,    "date": 2019,   "title": "Baccalauréat",    "localisation": "/vercel.svg",  "structure": "company",  "content": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged."  },
-    {    "id": 4,    "date": 2021,   "title": "BTS SIO - option SLAM",    "localisation": "/vercel.svg",  "structure": "company",  "content": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged."  },  
-    {    "id": 6,    "date": 2022,   "title": "Bachelor Développeur Web",    "localisation": "/vercel.svg",  "structure": "company",  "content": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged."  },
-    {    "id": 6,    "date": 2023,   "title": "Master Expert Développeur Web",    "localisation": "/vercel.svg",  "structure": "company",  "content": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged."  }
+    {
+        "id": 6,
+        "date": 2023,
+        "title": "Master Expert Développeur Web",
+        "localisation": "Nantes",
+        "structure": "Ynov Campus",
+        "competences": [
+            "Développement front-end avec Vue.js et React",
+            "Développement back-end avec Node.js",
+            "Utilisation de la blockchain avec Solidity",
+            "Création d'architectures cloud sur Microsoft Azure avec Terraform",
+            "Configuration de pipelines CI/CD avec GitLab CI",
+            "Développement d'une application similaire à BlaBlaCar en utilisant Next.js"
+        ]
+    },
+    {
+        "id": 6,
+        "date": 2022,
+        "title": "Bachelor Développeur Web",
+        "localisation": "Paris",
+        "structure": "Hetic",
+        "competences": [
+            "Développement back-end avec PHP Symfony",
+            "Développement front-end avec React et WordPress",
+            "Réalisation de nombreux projets web",
+            "Utilisation de technologies telles que PHP Symfony, React et WordPress"
+        ]    
+    },
+    {
+        "id": 4,
+        "date": 2021,
+        "title": "BTS SIO - option SLAM",
+        "localisation": "Chartres",
+        "structure": "Lycée Fulbert",
+        "competences": [
+            "Compréhension des fondements de l'informatique",
+            "Programmation orientée objet",
+            "Utilisation de frameworks back-end et front-end",
+            "Connaissances en réseaux",
+            "Manipulation de bases de données"
+        ]    
+    },  
+    {
+        "id": 5,
+        "date": 2019,
+        "title": "Baccalauréat",
+        "localisation": "Chartres",
+        "structure": "Lycée Fulbert",
+        "competences": [
+            "Compréhension de la place de l'informatique dans le monde du travail",
+            "Connaissance des principes fondamentaux de l'informatique",
+            "Sensibilisation aux défis et opportunités offerts par le domaine informatique"
+        ]    
+    }
 ]
