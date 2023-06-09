@@ -62,7 +62,7 @@ export default function Home() {
   };
 
   return (
-    <div className='w-full bg-dark relative'>
+    <div className='w-full bg-dark relative color-white'>
       <Suspense fallback={Loader()}>
 
         <Suspense fallback={Loader()}>
@@ -211,7 +211,7 @@ export default function Home() {
                 </ul>
               </div>
               <div className={!activeSection ? ' hidden' : 'w-full flex justify-center'}>
-                <ul className='w-full flex flex-col justify-center items-center'>
+                <ul className='w-full flex flex-col justify-center items-center mb-6'>
                   {visibleItems.map((item: props, index) => (
                     <motion.li
                       key={item.id}
