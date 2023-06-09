@@ -242,9 +242,26 @@ export default function Home() {
                         </div>
                       </div>
                       <div className='flex-1'>
-                        <h3 className='flex-1'>{item.title}</h3>
-                        <h4 className='flex-1'>{item.localisation}</h4>
-                        <p className='flex-1'>{item.content}</p>
+                        <h3 className='flex-1 text-2xl font-montserrat'>{item.title}</h3>
+                        <h4 className='flex-1 mt-4 mb-6 flex flex-row text-orange font-bold'>
+                          <IoSchool
+                            className="w-4 h-auto fill-white mr-2"
+                          />
+                          {item.structure}
+                          <span className='mx-2 text-white'> - </span>
+                          {item.localisation}
+                        </h4>
+                        <p className='flex-1'>
+                          <ul>
+                            {item.competences.map((item: string, index) => (
+                              <li key={index} className='flex flex-row mb-2'>
+                                <div
+                                  className="w-2 h-auto mr-2 ">-
+                                </div> {item}
+                              </li>
+                            ))}
+                          </ul>
+                        </p>
                       </div>
                     </motion.li>
                   ))}
