@@ -4,7 +4,7 @@ import { Suspense, useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { motion } from "framer-motion";
-import { FaArrowDown, FaBuilding, FaCircle, FaRegBuilding } from 'react-icons/fa';
+import { FaAngleDown, FaAngleUp, FaArrowDown, FaBuilding, FaCircle, FaRegBuilding } from 'react-icons/fa';
 import { useInView } from "react-intersection-observer";
 import NavigationBar from '../components/navigationBar';
 import Footer from '../components/footer';
@@ -35,6 +35,13 @@ export default function Home() {
   const [sectionAboutLoaded, setSectionAboutLoaded] = useState(false);
   const [sectionFormationsLoaded, setSectionFormationsLoaded] = useState(false);
   const [animationKey, setAnimationKey] = useState(0);
+  const [showAll, setShowAll] = useState(false);
+
+  const toggleShowAll = () => {
+    setShowAll(!showAll);
+  };
+
+  const visibleItems = showAll ? dataExperiences : dataExperiences.slice(0, 2);
 
   useEffect(() => {
     if (sectionAboutInView && !sectionAboutLoaded) {
@@ -119,7 +126,7 @@ export default function Home() {
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 3 }}
               >
-                <Link href='#about' className="animate-bounce flex justify-center">
+                <Link href='#formations' className="animate-bounce flex justify-center">
                   <div className=' hover:ring-4 hover:ring-orange rounded-full ease-out duration-200'>
                     <FaArrowDown size={32} className='m-2' />
                   </div>
@@ -131,29 +138,10 @@ export default function Home() {
         </Suspense>
       </Suspense>
 
-      {/*
-              <section id='about' className='w-full h-full pb-[-50px] bg-dark' ref={sectionAboutRef}>
-                {sectionAboutLoaded ? (
-                  <motion.div 
-                    className='max-w-screen-lg mx-auto flex flex-col mb-10 items-center'
-                    initial={{ opacity: 0, scale: 0.5 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    transition={{ duration: 0.5 }}
-                  >
-                    <div>Hello</div>
-                  </motion.div>
-                ) : (
-                  <div className='h-screen'>
-                    <Loader />
-                  </div>
-                )}
-              </section>
-      */}
-
-      <section id='formations' className='w-full h-full pb-[-50px] bg-dark' ref={sectionFormationsRef}>
+      <section id='formations' className='w-full h-full bg-dark lg:bg-[url("/bg2.png")] bg-cover bg-center overflow-hidden' ref={sectionFormationsRef}>
         {sectionFormationsLoaded ? (
           <motion.div
-            className='max-w-screen-lg mx-auto flex flex-col mb-10 items-center'
+            className='max-w-screen-lg mx-auto flex flex-col mb-10 items-center lg:mt-0 mt-10'
             initial={{ opacity: 0, scale: 0.5 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.5 }}
@@ -163,14 +151,14 @@ export default function Home() {
             >
               <div className='w-fit flex flex-col lg:flex-row justify-center items-center mb-20 bg-light-dark rounded-xl py-2 px-2'>
                 <h3
-                  className={`font-montserrat text-4xl font-bold mr-0 lg:mr-4 cursor-pointer inline-flex items-center justify-center py-2 px-2 w-fit rounded-xl ease-in-out duration-200
+                  className={`font-montserrat text-4xl font-bold mr-0 lg:mr-4 cursor-pointer inline-flex items-center justify-center hover:bg-white/25 py-2 px-2 w-fit rounded-xl ease-in-out duration-200
                     ${activeSection === 0 ? "text-white bg-white/25" : "text-white/50"}`}
                   onClick={() => setActiveSection(0)}
                 >
                   Expériences
                 </h3>
                 <h3
-                  className={`font-montserrat text-4xl font-bold ml-0 lg:ml-4 cursor-pointer inline-flex items-center justify-center text-center  py-2 px-2 w-fit rounded-xl ease-in-out duration-200
+                  className={`font-montserrat text-4xl font-bold ml-0 lg:ml-4 cursor-pointer inline-flex items-center justify-center text-center hover:bg-white/25 py-2 px-2 w-fit rounded-xl ease-in-out duration-200
                     ${activeSection === 1 ? "text-white bg-white/25" : "text-white/50"}`}
                   onClick={() => setActiveSection(1)}
                 >
@@ -178,8 +166,8 @@ export default function Home() {
                 </h3>
               </div>
               <div className={activeSection === 1 ? ' hidden' : 'w-full flex justify-center'}>
-                <ul className='w-full flex flex-col justify-center items-center'>
-                  {dataExperiences.map((item: props, index) => (
+                <ul className='w-full flex flex-col justify-center items-center mb-6'>
+                  {visibleItems.map((item: props, index) => (
                     <motion.li
                       key={item.id}
                       className='w-4/5 flex flex-row mb-6'
@@ -224,7 +212,7 @@ export default function Home() {
               </div>
               <div className={!activeSection ? ' hidden' : 'w-full flex justify-center'}>
                 <ul className='w-full flex flex-col justify-center items-center'>
-                  {dataExperiences.map((item: props, index) => (
+                  {visibleItems.map((item: props, index) => (
                     <motion.li
                       key={item.id}
                       className='w-4/5 flex flex-row mb-6'
@@ -266,6 +254,24 @@ export default function Home() {
                     </motion.li>
                   ))}
                 </ul>
+              </div>
+              <div className='flex justify-center items-center'>
+                {!showAll && dataExperiences.length > 3 && (
+                  <button className="text-white flex flex-row justify-center items-center px-4 py-2 rounded-lg hover:bg-white hover:bg-opacity-10" onClick={toggleShowAll}>
+                    <span className='mr-2'>Afficher plus</span>
+                    <div className='flex justify-center items-center'>
+                      <FaAngleDown className="w-4 h-auto fill-white" />
+                    </div>
+                  </button>
+                )}
+                {showAll && (
+                  <button className="text-white flex flex-row justify-center items-center px-4 py-2 rounded-lg hover:bg-white hover:bg-opacity-10" onClick={toggleShowAll}>
+                    <span className='mr-2'>Masquer</span>
+                    <div className='flex justify-center items-center'>
+                      <FaAngleUp className="w-4 h-auto fill-white" />
+                    </div>
+                  </button>
+                )}
               </div>
             </div>
           </motion.div>
