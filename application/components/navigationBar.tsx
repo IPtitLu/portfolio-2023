@@ -58,7 +58,7 @@ export default function navigationBar() {
                                     <li>
                                         <Link
                                             href="projets"
-                                            className={pathname === '/projets' ? "ml-4 mr-2 text-xl border-b-2 border-orange hover:text-orange" : "ml-2 mr-4 text-xl hover:text-orange hover:border-b-2 border-0 border-orange"}
+                                            className={pathname === '/projets' ? "ml-4 mr-2 text-xl border-b-2 border-orange hover:text-orange" : "ml-4 mr-2 text-xl hover:text-orange hover:border-b-2 border-0 border-orange"}
                                         >
                                             Portfolio
                                         </Link>
@@ -66,7 +66,7 @@ export default function navigationBar() {
                                     <li>
                                         <Link
                                             href="contact"
-                                            className={pathname === '/contact' ? "ml-4 mr-2 text-xl border-b-2 border-orange hover:text-orange" : "text-xl hover:text-orange hover:border-b-2 border-0 border-orange"}
+                                            className={pathname === '/contact' ? "ml-4 mr-2 text-xl border-b-2 border-orange hover:text-orange" : "ml-4 mr-2 text-xl hover:text-orange hover:border-b-2 border-0 border-orange"}
                                         >
                                             Contact
                                         </Link>
