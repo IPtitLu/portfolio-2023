@@ -4,13 +4,14 @@ import { Suspense, useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { motion } from "framer-motion";
-import { FaAngleDown, FaAngleUp, FaArrowDown, FaBuilding, FaCircle, FaRegBuilding } from 'react-icons/fa';
+import { FaAngleDown, FaAngleLeft, FaAngleRight, FaAngleUp, FaArrowDown, FaBuilding, FaCircle, FaCss3Alt, FaDocker, FaFigma, FaHtml5, FaJava, FaJsSquare, FaReact, FaRegBuilding, FaSymfony } from 'react-icons/fa';
 import { useInView } from "react-intersection-observer";
 import NavigationBar from '../components/navigationBar';
 import Footer from '../components/footer';
 import { Loader } from '../components/loader';
 import { FaGithub, FaLinkedinIn } from "react-icons/fa";
 import { IoSchool } from "react-icons/io5";
+import { SiTailwindcss } from "react-icons/si";
 
 import WaveBottom from '../public/wave-2.svg';
 
@@ -34,7 +35,6 @@ export default function Home() {
 
   const [sectionAboutLoaded, setSectionAboutLoaded] = useState(false);
   const [sectionFormationsLoaded, setSectionFormationsLoaded] = useState(false);
-  const [animationKey, setAnimationKey] = useState(0);
   const [showAll, setShowAll] = useState(false);
 
   const toggleShowAll = () => {
@@ -55,11 +55,34 @@ export default function Home() {
     }
   }, [sectionFormationsInView, sectionFormationsLoaded]);
 
-  const [showMore, setShowMore] = useState(false);
+  const [currentSet, setCurrentSet] = useState(0);
+  const skills = [
+    [<FaSymfony className="w-8 h-auto fill-white" />, <FaReact className="w-8 h-auto fill-blue-300" />, <FaJava className="w-8 h-auto fill-red-600" />, <FaFigma className="w-8 h-auto fill-pink-400" />, <FaDocker className="w-8 h-auto fill-blue-400" />],
+    [<FaHtml5 className="w-8 h-auto fill-orange" />, <FaCss3Alt className="w-8 h-auto fill-blue-600" />, <FaJsSquare className="w-8 h-auto fill-yellow-400" />, <SiTailwindcss className="w-8 h-auto fill-blue-400" />, <FaGithub className="w-8 h-auto fill-dark" />],
+  ];
 
-  const toggleShowMore = () => {
-    setShowMore(!showMore);
+  const handleNext = () => {
+    setCurrentSet((prevSet) => (prevSet + 1) % skills.length);
   };
+
+  const handlePrevious = () => {
+    setCurrentSet((prevSet) => (prevSet - 1 + skills.length) % skills.length);
+  };
+
+  const currentSkills = skills[currentSet];
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      handleNext();
+    }, 5000);
+
+    return () => {
+      clearInterval(interval);
+    };
+  }, []);
+
+  const [isLeftHovered, setIsLeftHovered] = useState(false);
+  const [isRightHovered, setIsRightHovered] = useState(false);
 
   return (
     <div className='w-full bg-dark relative color-white'>
@@ -137,6 +160,46 @@ export default function Home() {
           </section>
         </Suspense>
       </Suspense>
+
+      <section id='formations' className='w-full h-full bg-dark bg-cover bg-center overflow-hidden' ref={sectionFormationsRef}>
+        <div className='max-w-screen-lg mx-auto flex flex-col justify-center items-center mb-20'>
+          <div className='flex flex-row w-full justify-center px-10'>
+            <div>
+              <div
+                className='w-16 h-16 rounded-full bg-light-dark flex justify-center items-center mx-6 hover:bg-white hover:bg-opacity-10'
+                onMouseEnter={() => setIsLeftHovered(true)}
+                onMouseLeave={() => setIsLeftHovered(false)}
+              >
+                {isLeftHovered ? (
+                  <FaAngleLeft className="w-8 h-auto fill-orange" onClick={handlePrevious} />
+                ) : (
+                  <FaAngleLeft className="w-8 h-auto fill-white" onClick={handlePrevious} />
+                )}
+              </div>
+            </div>
+            {currentSkills.map((skill, index) => (
+              <div key={index}>
+                <div className='w-16 h-16 rounded-full bg-light-dark flex justify-center items-center mx-6'>
+                  {skill}
+                </div>
+              </div>
+            ))}
+            <div>
+              <div
+                className='w-16 h-16 rounded-full bg-light-dark flex justify-center items-center mx-6 hover:bg-white hover:bg-opacity-10'
+                onMouseEnter={() => setIsRightHovered(true)}
+                onMouseLeave={() => setIsRightHovered(false)}
+              >
+                {isRightHovered ? (
+                  <FaAngleRight className="w-8 h-auto fill-orange" onClick={handleNext} />
+                ) : (
+                  <FaAngleRight className="w-8 h-auto fill-white" onClick={handleNext} />
+                )}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
 
       <section id='formations' className='w-full h-full bg-dark lg:bg-[url("/bg2.png")] bg-cover bg-center overflow-hidden' ref={sectionFormationsRef}>
         {sectionFormationsLoaded ? (

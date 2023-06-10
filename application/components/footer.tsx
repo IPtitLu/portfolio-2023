@@ -7,7 +7,7 @@ const Footer = () => {
             <div className="max-w-screen-lg">
                 <div className='w-full flex justify-between items-center flex-col border-b border-orange pb-10'>
                     <div className='flex'>
-                        <Link href="https://github.com/IPtitLu">
+                        <Link href="mailto:lucasperez.apple@gmail.com">
                             <FaEnvelope
                                 className="w-10 h-auto hover:fill-orange"
                             />
