@@ -1,6 +1,6 @@
 [    
     {
-        "id": 6,
+        "id": 1,
         "date": 2023,
         "title": "Master Expert Développeur Web",
         "localisation": "Nantes",
@@ -15,7 +15,7 @@
         ]
     },
     {
-        "id": 6,
+        "id": 2,
         "date": 2022,
         "title": "Bachelor Développeur Web",
         "localisation": "Paris",
@@ -28,7 +28,7 @@
         ]    
     },
     {
-        "id": 4,
+        "id": 3,
         "date": 2021,
         "title": "BTS SIO - option SLAM",
         "localisation": "Chartres",
@@ -42,7 +42,7 @@
         ]    
     },  
     {
-        "id": 5,
+        "id": 4,
         "date": 2019,
         "title": "Baccalauréat",
         "localisation": "Chartres",

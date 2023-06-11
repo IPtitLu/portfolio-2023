@@ -42,6 +42,7 @@ export default function Home() {
   };
 
   const visibleItems = showAll ? dataExperiences : dataExperiences.slice(0, 2);
+  const visibleItems2 = showAll ? dataStudies : dataStudies.slice(0, 2);
 
   useEffect(() => {
     if (sectionAboutInView && !sectionAboutLoaded) {
@@ -230,7 +231,7 @@ export default function Home() {
               </div>
               <div className={activeSection === 1 ? ' hidden' : 'w-full flex justify-center'}>
                 <ul className='w-full flex flex-col justify-center items-center mb-6'>
-                  {visibleItems.map((item: props, index) => (
+                  {visibleItems2.map((item: props, index) => (
                     <motion.li
                       key={item.id}
                       className='w-4/5 flex flex-row mb-6'

@@ -1,34 +1,65 @@
-[    
-    {
-        "id": 6,
-        "date": 2023,
-        "title": "Master Expert Développeur Web",
-        "localisation": "/vercel.svg",
-        "structure": "company",
-        "content": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged."
-    },
-    {
-        "id": 6,
-        "date": 2022,
-        "title": "Bachelor Développeur Web",
-        "localisation": "/vercel.svg",
-        "structure": "company",
-        "content": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged."
-    },
-    {
-        "id": 4,
-        "date": 2021,
-        "title": "BTS SIO - option SLAM",
-        "localisation": "/vercel.svg",
-        "structure": "company",
-        "content": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged."
-    },  
-    {
-        "id": 5,
-        "date": 2019,
-        "title": "Baccalauréat",
-        "localisation": "/vercel.svg",
-        "structure": "company",
-        "content": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged."
-    }
+[
+  {
+    "id": 1,
+    "date": 2023,
+    "title": "Dévelopeur Fullstack",
+    "localisation": "Nantes",
+    "structure": "Sopra Steria",
+    "competences": [
+      "Développement de tâches backend en Java sur un projet complexe avec gestion de files JMS",
+      "Appels entre modules",
+      "Mise en place de fonctionnalités frontend en React",
+      "Optimisation des composants et gestion des tests poussés"
+    ]
+  },
+  {
+    "id": 2,
+    "date": 2022,
+    "title": "Dévelopeur Fullstack",
+    "localisation": "Le Coudray",
+    "structure": "V-labs",
+    "competences": [
+      "Développement de projets backend en PHP Symfony",
+      "Structuration, sécurisation et qualité du code",
+      "Réalisation de tâches front-end en React",
+      "Mise en place de landing pages et de composants UX/UI en Symfony avec une architecture atomique"
+    ]
+  },
+  {
+    "id": 3,
+    "date": 2021,
+    "title": "Développeur Fullstack",
+    "localisation": "Le Coudray",
+    "structure": "V-labs",
+    "competences": [
+      "Mise en place d'un site local de gestion en Symfony",
+      "Gestion d'utilisateurs, de concessions et de véhicules affiliés",
+      "Création d'une landing page pour Kropeo en Symfony",
+      "Ajout de blocs front-end sur le site v-labs.fr"
+    ]
+  },
+  {
+    "id": 4,
+    "date": 2020,
+    "title": "Développeur backend",
+    "localisation": "Chartres",
+    "structure": "Ingencys",
+    "competences": [
+      "Migration d'un projet vers une technologie plus récente",
+      "Migration d'un projet en Flash vers JavaScript",
+      "Étape intermédiaire de migration ActionScript 2 vers ActionScript 3"
+    ]
+  },
+  {
+    "id": 5,
+    "date": 2020,
+    "title": "Développeur backend",
+    "localisation": "Chartres",
+    "structure": "Ingencys",
+    "competences": [
+      "Mise en place et développement d'un chatbot pour des structures d'e-commerce",
+      "Utilisation des technologies JavaScript, Node.js et JSON",
+      "Stage de première année de BTS"
+    ]
+  }
 ]
