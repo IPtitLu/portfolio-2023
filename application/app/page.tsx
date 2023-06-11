@@ -12,6 +12,7 @@ import { Loader } from '../components/loader';
 import { FaGithub, FaLinkedinIn } from "react-icons/fa";
 import { IoSchool } from "react-icons/io5";
 import { SiTailwindcss } from "react-icons/si";
+import { SkillsModale } from "../components/skillsModale"
 
 import WaveBottom from '../public/wave-2.svg';
 
@@ -58,8 +59,20 @@ export default function Home() {
 
   const [currentSet, setCurrentSet] = useState(0);
   const skills = [
-    [<FaSymfony className="w-8 h-auto fill-white" />, <FaReact className="w-8 h-auto fill-blue-300" />, <FaJava className="w-8 h-auto fill-red-600" />, <FaFigma className="w-8 h-auto fill-pink-400" />, <FaDocker className="w-8 h-auto fill-blue-400" />],
-    [<FaHtml5 className="w-8 h-auto fill-orange" />, <FaCss3Alt className="w-8 h-auto fill-blue-600" />, <FaJsSquare className="w-8 h-auto fill-yellow-400" />, <SiTailwindcss className="w-8 h-auto fill-blue-400" />, <FaGithub className="w-8 h-auto fill-dark" />],
+    [
+      { icon: <FaSymfony className="w-8 h-auto fill-white" />, percent: 170, color: "text-white" },
+      { icon: <FaReact className="w-8 h-auto fill-blue-300" />, percent: 150, color: "text-blue-300" },
+      { icon: <FaJava className="w-8 h-auto fill-red-600" />, percent: 100, color: "text-red-600" },
+      { icon: <FaFigma className="w-8 h-auto fill-pink-400" />, percent: 120, color: "text-pink-400" },
+      { icon: <FaDocker className="w-8 h-auto fill-blue-400" />, percent: 100, color: "text-blue-400" },
+    ],
+    [
+      { icon: <FaHtml5 className="w-8 h-auto fill-orange" />, percent: 180, color: "text-orange" },
+      { icon: <FaCss3Alt className="w-8 h-auto fill-blue-600" />, percent: 180, color: "text-blue-600" },
+      { icon: <FaJsSquare className="w-8 h-auto fill-yellow-400" />, percent: 160, color: "text-yellow-400" },
+      { icon: <SiTailwindcss className="w-8 h-auto fill-blue-400" />, percent: 180, color: "text-blue-400" },
+      { icon: <FaGithub className="w-8 h-auto fill-white" />, percent: 150, color: "text-gray-200" },
+    ],
   ];
 
   const handleNext = () => {
@@ -75,7 +88,7 @@ export default function Home() {
   useEffect(() => {
     const interval = setInterval(() => {
       handleNext();
-    }, 5000);
+    }, 10000);
 
     return () => {
       clearInterval(interval);
@@ -84,6 +97,11 @@ export default function Home() {
 
   const [isLeftHovered, setIsLeftHovered] = useState(false);
   const [isRightHovered, setIsRightHovered] = useState(false);
+  const [isOpen, setIsOpen] = useState(false)
+
+  const [progress, setProgress] = useState(75);
+  const circumference = 2 * Math.PI * 120;
+  const dashOffset = circumference - (progress / 100) * circumference;
 
   return (
     <div className='w-full bg-dark relative color-white'>
@@ -162,12 +180,12 @@ export default function Home() {
         </Suspense>
       </Suspense>
 
-      <section id='formations' className='w-full h-full bg-dark bg-cover bg-center overflow-hidden' ref={sectionFormationsRef}>
-        <div className='max-w-screen-lg mx-auto flex flex-col justify-center items-center mb-20'>
-          <div className='flex flex-row w-full justify-center px-10'>
-            <div>
+      <section id='about' className='w-full h-full bg-dark bg-cover bg-center overflow-hidden' ref={sectionFormationsRef}>
+        <div className='max-w-screen-lg mx-auto flex flex-col justify-center items-center lg:mb-20 mb-0'>
+          <div className='flex flex-row lg:nowrap wrap  w-full justify-center items-center px-10'>
+            <div className='lg:flex hidden'>
               <div
-                className='w-16 h-16 rounded-full bg-light-dark flex justify-center items-center mx-6 hover:bg-white hover:bg-opacity-10'
+                className='w-16 h-16 rounded-full bg-light-dark flex justify-center items-center mx-6 hover:bg-white hover:bg-opacity-10 cursor-pointer'
                 onMouseEnter={() => setIsLeftHovered(true)}
                 onMouseLeave={() => setIsLeftHovered(false)}
               >
@@ -179,15 +197,51 @@ export default function Home() {
               </div>
             </div>
             {currentSkills.map((skill, index) => (
-              <div key={index}>
-                <div className='w-16 h-16 rounded-full bg-light-dark flex justify-center items-center mx-6'>
-                  {skill}
-                </div>
+              <div key={index} className="h-16 flex justify-center items-center relative lg:mb-0 mb-4">
+                <svg className="transform -rotate-90 w-28 h-28 z-10" viewBox="0 0 130 128">
+                  <circle
+                    cx="64"
+                    cy="64"
+                    r="35"
+                    stroke="currentColor"
+                    strokeWidth="5"
+                    fill="transparent"
+                    strokeDasharray={skill.percent}
+                    className={skill.color}
+                  />
+                </svg>
+                <span className="absolute text-5xl w-16 h-16 rounded-full bg-light-dark z-0">
+                  <div className="flex items-center justify-center h-full">
+                    <div>
+                      <span className="text-4xl rounded-full bg-light-dark w-10">{skill.icon}</span>
+                    </div>
+                  </div>
+                </span>
               </div>
             ))}
-            <div>
+
+            {/*
+            <div className="flex items-center justify-center">
+              <svg className="transform -rotate-90 w-72 h-72">
+                <circle
+                  cx="145"
+                  cy="145"
+                  r="120"
+                  stroke="currentColor"
+                  strokeWidth="30"
+                  fill="transparent"
+                  strokeDasharray={circumference}
+                  strokeDashoffset={dashOffset}
+                  className="text-blue-500"
+                />
+              </svg>
+              <span className="absolute text-5xl">{`${progress}%`}</span>
+            </div>
+            */}
+
+            <div className='lg:flex hidden'>
               <div
-                className='w-16 h-16 rounded-full bg-light-dark flex justify-center items-center mx-6 hover:bg-white hover:bg-opacity-10'
+                className='w-16 h-16 rounded-full bg-light-dark flex justify-center items-center mx-6 hover:bg-white hover:bg-opacity-10 cursor-pointer'
                 onMouseEnter={() => setIsRightHovered(true)}
                 onMouseLeave={() => setIsRightHovered(false)}
               >
@@ -215,14 +269,14 @@ export default function Home() {
             >
               <div className='w-fit flex flex-col lg:flex-row justify-center items-center mb-20 bg-light-dark rounded-xl py-2 px-2'>
                 <h3
-                  className={`font-montserrat text-4xl font-bold mr-0 lg:mr-4 cursor-pointer inline-flex items-center justify-center hover:bg-white/25 py-2 px-2 w-fit rounded-xl ease-in-out duration-200
+                  className={`font-montserrat text-4xl font-bold mr-0 lg:mr-4 cursor-pointer inline-flex items-center justify-center hover:bg-white/25 py-2 px-2 w-fit rounded-xl ease-in-out duration-200 flex-1
                     ${activeSection === 0 ? "text-white bg-white/25" : "text-white/50"}`}
                   onClick={() => setActiveSection(0)}
                 >
                   Expériences
                 </h3>
                 <h3
-                  className={`font-montserrat text-4xl font-bold ml-0 lg:ml-4 cursor-pointer inline-flex items-center justify-center text-center hover:bg-white/25 py-2 px-2 w-fit rounded-xl ease-in-out duration-200
+                  className={`font-montserrat text-4xl font-bold ml-0 lg:ml-4 cursor-pointer inline-flex items-center justify-center text-center hover:bg-white/25 py-2 px-2 w-fit rounded-xl ease-in-out duration-200 flex-1
                     ${activeSection === 1 ? "text-white bg-white/25" : "text-white/50"}`}
                   onClick={() => setActiveSection(1)}
                 >
