@@ -183,7 +183,7 @@ export default function Home() {
       <section id='about' className='w-full h-full bg-dark bg-cover bg-center overflow-hidden' ref={sectionFormationsRef}>
         <div className='max-w-screen-lg mx-auto flex flex-col justify-center items-center lg:mb-20 mb-0'>
           <div className='flex flex-row lg:nowrap wrap  w-full justify-center items-center px-10'>
-            <div className='lg:flex hidden'>
+            <div className='md:flex hidden'>
               <div
                 className='w-16 h-16 rounded-full bg-light-dark flex justify-center items-center mx-6 hover:bg-white hover:bg-opacity-10 cursor-pointer'
                 onMouseEnter={() => setIsLeftHovered(true)}
@@ -196,29 +196,84 @@ export default function Home() {
                 )}
               </div>
             </div>
-            {currentSkills.map((skill, index) => (
-              <div key={index} className="h-16 flex justify-center items-center relative lg:mb-0 mb-4">
-                <svg className="transform -rotate-90 w-28 h-28 z-10" viewBox="0 0 130 128">
-                  <circle
-                    cx="64"
-                    cy="64"
-                    r="35"
-                    stroke="currentColor"
-                    strokeWidth="5"
-                    fill="transparent"
-                    strokeDasharray={skill.percent}
-                    className={skill.color}
-                  />
-                </svg>
-                <span className="absolute text-5xl w-16 h-16 rounded-full bg-light-dark z-0">
-                  <div className="flex items-center justify-center h-full">
-                    <div>
-                      <span className="text-4xl rounded-full bg-light-dark w-10">{skill.icon}</span>
+            <div className='hidden md:flex'>
+              {currentSkills.map((skill, index) => (
+                <div key={index} className="h-16 flex justify-center items-center relative lg:mb-0 mb-4">
+                  <svg className="transform -rotate-90 w-28 h-28 z-10" viewBox="0 0 130 128">
+                    <circle
+                      cx="64"
+                      cy="64"
+                      r="35"
+                      stroke="currentColor"
+                      strokeWidth="5"
+                      fill="transparent"
+                      strokeDasharray={skill.percent}
+                      className={skill.color}
+                    />
+                  </svg>
+                  <span className="absolute text-5xl w-16 h-16 rounded-full bg-light-dark z-0">
+                    <div className="flex items-center justify-center h-full">
+                      <div>
+                        <span className="text-4xl rounded-full bg-light-dark w-10">{skill.icon}</span>
+                      </div>
                     </div>
+                  </span>
+                </div>
+              ))}
+            </div>
+
+            <div className='flex md:hidden flex-row'>
+              <div className='flex flex-col'>
+                {skills[0].map((skill, index) => (
+                  <div key={index} className="h-16 flex justify-center items-center relative lg:mb-0 mb-4">
+                    <svg className="transform -rotate-90 w-28 h-28 z-10" viewBox="0 0 130 128">
+                      <circle
+                        cx="64"
+                        cy="64"
+                        r="35"
+                        stroke="currentColor"
+                        strokeWidth="5"
+                        fill="transparent"
+                        strokeDasharray={skill.percent}
+                        className={skill.color}
+                      />
+                    </svg>
+                    <span className="absolute text-5xl w-16 h-16 rounded-full bg-light-dark z-0">
+                      <div className="flex items-center justify-center h-full">
+                        <div>
+                          <span className="text-4xl rounded-full bg-light-dark w-10">{skill.icon}</span>
+                        </div>
+                      </div>
+                    </span>
                   </div>
-                </span>
+                ))}
               </div>
-            ))}
+              <div className='flex md:hidden flex-col'>
+                {skills[1].map((skill, index) => (
+                  <div key={index} className="h-16 flex justify-center items-center relative lg:mb-0 mb-4">
+                    <svg className="transform -rotate-90 w-28 h-28 z-10" viewBox="0 0 130 128">
+                      <circle
+                        cx="64"
+                        cy="64"
+                        r="35"
+                        stroke="currentColor"
+                        strokeWidth="5"
+                        fill="transparent"
+                        strokeDasharray={skill.percent}
+                        className={skill.color}
+                      />
+                    </svg>
+                    <span className="absolute text-5xl w-16 h-16 rounded-full bg-light-dark z-0">
+                      <div className="flex items-center justify-center h-full">
+                        <div>
+                          <span className="text-4xl rounded-full bg-light-dark w-10">{skill.icon}</span>
+                        </div>
+                      </div>
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </div>
 
             {/*
             <div className="flex items-center justify-center">
@@ -239,7 +294,7 @@ export default function Home() {
             </div>
             */}
 
-            <div className='lg:flex hidden'>
+            <div className='md:flex hidden'>
               <div
                 className='w-16 h-16 rounded-full bg-light-dark flex justify-center items-center mx-6 hover:bg-white hover:bg-opacity-10 cursor-pointer'
                 onMouseEnter={() => setIsRightHovered(true)}
