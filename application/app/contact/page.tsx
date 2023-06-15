@@ -1,87 +1,139 @@
 'use client'
 
-import { Suspense } from 'react';
-import NavigationBar from '../../components/navigationBar';
-import { Loader } from '../../components/loader';
-import Link from 'next/link';
-import { FaArrowDown, FaGithub, FaLinkedinIn } from 'react-icons/fa';
-import { motion } from 'framer-motion';
-import Image from 'next/image';
 import Footer from '@/components/footer';
+import { Loader } from '@/components/loader';
+import NavigationBar from '@/components/navigationBar';
+import { motion } from 'framer-motion';
+import { Suspense, useEffect, useState } from 'react';
 
-export default function Contact() {
+const ContactForm = () => {
+  const [email, setEmail] = useState('');
+  const [content, setContent] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
+  const [isStylesLoaded, setIsStylesLoaded] = useState(false);
+
+  useEffect(() => {
+    // Marquer les styles comme chargés après un court délai
+    const timeout = setTimeout(() => {
+      setIsStylesLoaded(true);
+    }, 100);
+
+    // Nettoyer le délai d'attente lorsque le composant est démonté
+    return () => clearTimeout(timeout);
+  }, []);
+
+
+  const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setEmail(e.target.value);
+  };
+
+  const handleContentChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    setContent(e.target.value);
+  };
+
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+  
+        if (!validateForm()) {
+        return;
+        }
+    
+        try {
+        const response = await fetch('/api/contact', {
+            method: 'POST',
+            body: JSON.stringify({ email, content }),
+            headers: {
+            'Content-Type': 'application/json',
+            },
+        });
+    
+        if (response.ok) {
+            console.log('Email sent successfully!');
+            setEmail('');
+            setContent('');
+        } else if (response.status === 429) {
+            console.error('Too many requests from this IP, please try again later.');
+            setErrorMessage('Too many requests from this IP, please try again later.');
+        } else {
+            console.error('Error sending email:', response.statusText);
+            setErrorMessage('An error occurred while sending the email.');
+        }
+        } catch (error) {
+        console.error('Error sending email:', error);
+        setErrorMessage('An error occurred while sending the email.');
+        }
+    };
+
+    const validateForm = () => {
+        if (!email || !content) {
+        setErrorMessage('Remplissez tout le formulaire.');
+        return false;
+        }
+    
+        if (!isValidEmail(email)) {
+        setErrorMessage('Renseignez une adresse email valide.');
+        return false;
+        }
+    
+        if (content.length > 500) {
+        setErrorMessage('Le contenu ne doit pas excéder 500 caractères.');
+        return false;
+        }
+    
+        setErrorMessage('');
+        return true;
+    };
+  
+    const isValidEmail = (email: string): boolean => {
+        // Utilisez une expression régulière pour vérifier si l'e-mail est valide
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return emailRegex.test(email);
+    };
+
     return (
         <div className='w-full bg-dark relative'>
-            <Suspense fallback={Loader()}>
-                
-                <Suspense fallback={Loader()}>
                     <NavigationBar />
-                </Suspense>
-                <Suspense fallback={Loader()}>
-                    <section id='home' className='w-full h-screen pb-[-50px] bg-[url("/bg1.svg")] bg-cover bg-right lg:bg-center overflow-hidden'>
-                    <div
-                        className='max-w-screen-lg mx-auto flex flex-col'
-                    >
-                        <div className='w-full flex flex-col px-10 xl:px-0 lg:flex-row py-50 justify-between'>
-                        <motion.div className='flex-1 flex flex-col items-center lg:items-start justify-center p-0 pt-20 lg:py-56'
-                            initial={{ x: -1000 }}
+                    <section id='projets' className='w-full pb-[-50px] bg-[url("/bg1.svg")] bg-cover bg-right lg:bg-center overflow-hidden'>
+                        <motion.div 
+                            className='max-w-screen-lg my-32 mx-auto flex flex-col justify-center items-center'
+                            initial={{ x: -2000 }}
                             animate={{ x: 0 }}
-                            transition={{ type: "spring", stiffness: 75, delay: 0.7 }}
+                            transition={{ type: "spring", stiffness: 60, delay: (1) }}
                         >
-                            <div className='w-max'>
-                            <h2 className='w-50 font-montserrat text-4xl font-bold mb-2 animate-typing overflow-hidden whitespace-nowrap border-r-4 border-r-white pr-5'>Developpeur Web</h2>
-                            </div>
-                            <h3 className='w-50 text-2xl mb-6 font-semibold'>Front & Backend</h3>
-                            <p className='text-lg w-50 mb-6 text-center lg:text-left'>Je suis un développeur web
-                            passionné par l'innovation, capable de
-                            traduire les idées en <span className='text-orange'>réalité numérique</span> à
-                            travers une <span className='text-orange'>expertise</span> en front et back.</p>
-                            <div className='w-full flex justify-center items-center lg:justify-start'>
-                            <Link
-                                href="contact"
-                                className={"border-2 border-orange rounded-md py-2 px-4 hover:bg-orange hover:text-dark ease-in-out duration-300"}
-                            >
-                                <span className='text-2xl font-semibold'>Me contacter</span>
-                            </Link>
-                            <Link href="https://github.com/IPtitLu">
-                                <FaGithub
-                                className="w-10 h-auto mx-6 hover:fill-orange"
-                                />
-                            </Link>
-                            <Link href="https://www.linkedin.com/in/lucas-perez-71994b17a/">
-                                <FaLinkedinIn
-                                className="w-10 h-auto hover:fill-orange"
-                                />
-                            </Link>
-                            </div>
+                            {isStylesLoaded ? ( // Afficher le formulaire une fois les styles chargés
+                                <form onSubmit={handleSubmit} className='lg:w-1/2 w-full px-10 py-10 bg-light-dark shadow-xl lg:rounded-lg rounded-none'>
+                                <div className='mb-10'>
+                                    <label htmlFor="email" className='mb-10 font-montserrat text-xl'>Email</label>
+                                    <input
+                                    type="email"
+                                    id="email"
+                                    value={email}
+                                    onChange={handleEmailChange}  placeholder='email@example.com'
+                                    className='appearance-none block w-full bg-light-dark/50 text-white border-2 border-gray-500 rounded py-3 px-4 mb-3 mt-4 leading-tight focus:outline-none  focus:border-orange focus:bg-light-dark/20'
+                                    />
+                                </div>
+                                <div className='mb-4'>
+                                    <label htmlFor="content" className='mb-4 font-montserrat text-xl'>Contenu</label>
+                                    <textarea id="content" value={content} onChange={handleContentChange} placeholder='Votre projet en quelques mots.. '
+                                    className='no-resize appearance-none block w-full bg-light-dark/50 text-white border-2 border-gray-500 rounded py-3 px-4 mb-3 mt-4 leading-tight focus:outline-none  focus:border-orange focus:bg-light-dark/20 h-48 resize-none'/>
+                                </div>
+                                {errorMessage && <div className='mb-4 text-orange'>{errorMessage}</div>}
+                                <button 
+                                    type="submit" 
+                                    className='border-2 border-orange rounded-md py-2 px-4 hover:bg-orange hover:text-dark ease-in-out duration-300'
+                                >
+                                    <span className='text-2xl font-semibold'>Envoyer</span>
+                                </button>
+                            </form>
+                            ) : (
+                                <Loader />
+                            )}
+                            
                         </motion.div>
-                        <motion.div className='flex-1 flex justify-center mb-20 lg:mb-0 lg:justify-end items-center'
-                            initial={{ x: 1000 }}
-                            animate={{ x: 0 }}
-                            transition={{ type: "spring", stiffness: 75, delay: 1 }}
-                        >
-                            <Image
-                            src="/lucas-perez.png"
-                            alt="Lucas Perez"
-                            className="w-96 h-auto"
-                            width={500}
-                            height={500}
-                            priority
-                            />
-                        </motion.div>
-                        </div>
-                        <motion.div
-                        initial={{ opacity: 0, scale: 0.5 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        transition={{ duration: 3 }}
-                        >
-                        </motion.div>
-                    </div>
                     </section>
-                </Suspense>
-            </Suspense>
-            <Footer />
+                <Footer />
         </div>
-    )
-  }
-  
+    );
+    };
+
+export default ContactForm;
