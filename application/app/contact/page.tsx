@@ -5,12 +5,24 @@ import { Loader } from '@/components/loader';
 import NavigationBar from '@/components/navigationBar';
 import { motion } from 'framer-motion';
 import { Suspense, useEffect, useState } from 'react';
+import emailjs from 'emailjs-com';
 
 const ContactForm = () => {
-  const [email, setEmail] = useState('');
-  const [content, setContent] = useState('');
-  const [errorMessage, setErrorMessage] = useState('');
-  const [isStylesLoaded, setIsStylesLoaded] = useState(false);
+    const [email, setEmail] = useState('');
+    const [content, setContent] = useState('');
+    const [errorMessage, setErrorMessage] = useState('');
+    const [isStylesLoaded, setIsStylesLoaded] = useState(false);
+    const [isSubmitting, setIsSubmitting] = useState(true);
+
+    const [isEmailSent, setIsEmailSent] = useState(false);
+
+    useEffect(() => {
+    if (localStorage.getItem('emailSent')) {
+        
+        setIsEmailSent(true);
+        localStorage.removeItem('emailSent'); // Supprimez la clé du sessionStorage après l'avoir utilisée
+    }
+    }, []);
 
     useEffect(() => {
         // Marquer les styles comme chargés après un court délai
@@ -33,32 +45,42 @@ const ContactForm = () => {
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
+
+        if (isSubmitting === false) {
+            return;
+        }
   
         if (!validateForm()) {
         return;
         }
     
         try {
-            const response = await fetch('/api/contact', {
-                method: 'POST',
-                body: JSON.stringify({ email, content }),
-            });
-        
-            if (response.ok) {
-                console.log('Message envoyé avec succès !');
-                setEmail('');
-                setContent('');
-            } else if (response.status === 429) {
-                console.error('Too many requests from this IP, please try again later.');
-                setErrorMessage('Vous avez envoyé trop de messages, ressayez plus tard.');
-            } else {
-                console.log(response);
-                console.error('Error sending email:', response.statusText);
-                setErrorMessage("Un problème technique est survenu lors de l'envoi du message. Contactez moi directement via cet email : lucasperez.dev.pro@gmail.com");
-            }
+            // const response = await fetch('/api/contact', {
+            //     method: 'POST',
+            //     body: JSON.stringify({ email, content }),
+            // });
+
+            emailjs.send(
+                'YOUR_SERVICE_ID',
+                'YOUR_TEMPLATE_ID',
+                {
+                  to_email: 'lucasperez.dev.pro@gmail.com',
+                  from_email: email,
+                  message: content,
+                },
+                'YOUR_USER_ID'
+              );
+              setErrorMessage('Message envoyé avec succès !');
+              setEmail('');
+              setContent('');
+              setIsSubmitting(false);
+              localStorage.setItem('emailSent', 'true');
+            
         } catch (error) {
         console.error('Error sending email:', error);
         setErrorMessage("Un problème technique est survenu lors de l'envoi du message. Contactez moi directement via cet email : lucasperez.dev.pro@gmail.com.");
+        } finally {
+            setIsSubmitting(false);
         }
     };
 
@@ -73,8 +95,8 @@ const ContactForm = () => {
         return false;
         }
     
-        if (content.length > 500) {
-        setErrorMessage('Le contenu ne doit pas excéder 500 caractères.');
+        if (content.length > 1000) {
+        setErrorMessage('Le contenu ne doit pas excéder 1000 caractères.');
         return false;
         }
     
@@ -118,7 +140,11 @@ const ContactForm = () => {
                                     {errorMessage && <div className='mb-4 text-orange'>{errorMessage}</div>}
                                     <button 
                                         type="submit" 
-                                        className='border-2 border-orange rounded-md py-2 px-4 hover:bg-orange hover:text-dark ease-in-out duration-300'
+                                        className={isSubmitting === false
+                                            ? 'border-2 border-gray-500 rounded-md py-2 px-4 cursor-not-allowed ease-in-out duration-300'
+                                            : 'border-2 border-orange rounded-md py-2 px-4 hover:bg-orange hover:text-dark ease-in-out duration-300' 
+                                        }
+                                        disabled={isEmailSent} 
                                     >
                                         <span className='text-2xl font-semibold'>Envoyer</span>
                                     </button>
