@@ -13,7 +13,7 @@ export default function Projets() {
                 <Suspense fallback={Loader()}>
                     <NavigationBar />
                 </Suspense>
-                <Suspense fallback={Loader()}>
+                {/* <Suspense fallback={Loader()}>
                     <section id='projets' className='w-full h-screen pb-[-50px] bg-[url("/bg1.svg")] bg-cover bg-right lg:bg-center overflow-hidden'>
                         <div className='max-w-screen-lg mx-auto flex flex-col'>
                             <h3 className='font-montserrat text-3xl font-bold ml-4 my-10 text-center'>Projets</h3>
@@ -32,7 +32,7 @@ export default function Projets() {
                             </div>
                         </div>
                     </section>
-                </Suspense>
+                </Suspense> */}
                 <Footer />
             </Suspense>
         </div>
