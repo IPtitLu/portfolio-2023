@@ -55,11 +55,6 @@ const ContactForm = () => {
         }
     
         try {
-            // const response = await fetch('/api/contact', {
-            //     method: 'POST',
-            //     body: JSON.stringify({ email, content }),
-            // });
-
             emailjs.send(
                 'YOUR_SERVICE_ID',
                 'YOUR_TEMPLATE_ID',
