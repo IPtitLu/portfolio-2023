@@ -4,7 +4,7 @@ import { Suspense, useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { motion } from "framer-motion";
-import { FaAngleDown, FaAngleLeft, FaAngleRight, FaAngleUp, FaArrowDown, FaBuilding, FaCircle, FaCss3Alt, FaDocker, FaFigma, FaHtml5, FaJava, FaJsSquare, FaReact, FaRegBuilding, FaSymfony } from 'react-icons/fa';
+import { FaAngleDown, FaAngleLeft, FaAngleRight, FaAngleUp, FaArrowDown, FaCss3Alt, FaDocker, FaFigma, FaHtml5, FaJava, FaJsSquare, FaReact, FaSymfony } from 'react-icons/fa';
 import { useInView } from "react-intersection-observer";
 import NavigationBar from '../components/navigationBar';
 import Footer from '../components/footer';
@@ -12,7 +12,6 @@ import { Loader } from '../components/loader';
 import { FaGithub, FaLinkedinIn } from "react-icons/fa";
 import { IoSchool } from "react-icons/io5";
 import { SiTailwindcss } from "react-icons/si";
-import { SkillsModale } from "../components/skillsModale"
 
 import WaveBottom from '../public/wave-2.svg';
 
