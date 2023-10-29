@@ -7,7 +7,7 @@ import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 import { motion } from "framer-motion";
 
 const navigation = [
-    { name: 'A propos', href: '#about', class: 'ml-4 mr-2 text-xl hover:text-orange hover:border-b-2 border-0 border-orange', activeClass: 'ml-4 mr-2 text-xl border-b-2 border-orange hover:text-orange' },
+    { name: 'A propos', href: '/', class: 'ml-4 mr-2 text-xl hover:text-orange hover:border-b-2 border-0 border-orange', activeClass: 'ml-4 mr-2 text-xl border-b-2 border-orange hover:text-orange' },
     { name: 'Portfolio', href: '/projets', class: 'ml-2 mr-4 text-xl hover:text-orange hover:border-b-2 border-0 border-orange', activeClass: 'ml-4 mr-2 text-xl border-b-2 border-orange hover:text-orange' },
     { name: 'Contact', href: '/contact', class: 'text-xl hover:text-orange hover:border-b-2 border-0 border-orange', activeClass: 'ml-4 mr-2 text-xl border-b-2 border-orange hover:text-orange' },
 ]
