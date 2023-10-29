@@ -24,11 +24,7 @@ export default function navigationBar() {
             {({ open }) => (
                 <>
                     <div className="mx-auto max-w-7xl px-2 lg:px-6 lg:px-8">
-                        <motion.div className='relative max-w-screen-lg flex flex-col lg:flex-row mx-auto py-4 justify-center lg:justify-between px-10 xl:px-0'
-                            initial={{ opacity: 0, scale: 0.5 }}
-                            animate={{ opacity: 1, scale: 1 }}
-                            transition={{ duration: 0.5 }}
-                        >
+                        <div className='relative max-w-screen-lg flex flex-col lg:flex-row mx-auto py-4 justify-center lg:justify-between px-10 xl:px-0'>
                             <div className="absolute inset-y-0 left-0 flex items-center lg:hidden">
                                 {/* Mobile menu button*/}
                                 <Disclosure.Button className="inline-flex items-center justify-center rounded-md p-2 text-orange hover:text-white">
@@ -49,7 +45,7 @@ export default function navigationBar() {
                                 <ul className="hidden lg:flex lg-flex flex-row items-center">
                                     <li>
                                         <Link
-                                            href="#about"
+                                            href=""
                                             className={pathname === '/' ? "ml-4 mr-2 text-xl border-b-2 border-orange hover:text-orange" : "ml-4 mr-2 text-xl hover:text-orange hover:border-b-2 border-0 border-orange"}
                                         >
                                             A propos
@@ -73,7 +69,7 @@ export default function navigationBar() {
                                     </li>
                                 </ul>
                             </div>
-                        </motion.div>
+                        </div>
                     </div>
 
                     <Disclosure.Panel className="lg:hidden">

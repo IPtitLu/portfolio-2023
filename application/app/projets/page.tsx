@@ -14,21 +14,17 @@ export default function Projets() {
                     <NavigationBar />
                 </Suspense>
                 <Suspense fallback={Loader()}>
-                    <section id='projets' className='w-full h-screen pb-[-50px] bg-[url("/bg1.svg")] bg-cover bg-right lg:bg-center overflow-hidden'>
+                    <section id='projets' className='w-full pb-[-50px] bg-[url("/bg1.svg")] bg-cover bg-right lg:bg-center overflow-hidden'>
                         <div className='max-w-screen-lg mx-auto flex flex-col'>
-                            <h3 className='font-montserrat text-3xl font-bold ml-4 my-10 text-center'>Projets</h3>
-                            <div className='w-full flex flex-row'>
-                                <div className='flex-1 flex justify-center items-center py-10 px-4'>
-                                    <Image
-                                        src={"/company-finder.png"}
-                                        alt={"projet 1"}
-                                        className="w-full rounded-lg"
-                                        width={500}
-                                        height={500}
-                                        priority
-                                    />
-                                </div>
-                                <div className='flex-1'></div>
+                            <h2 className='font-montserrat text-xl text-center mt-10'>Projets - Coming soon</h2>
+                            <div className="grid grid-flow-row-dense grid-cols-3 gap-4 my-10">
+                                <div className="col-span-2 h-[200px] bg-zinc-500 rounded-md p-2">01</div>
+                                <div className="h-[200px] bg-zinc-500 rounded-md p-2">02</div>
+                                <div className="h-[200px] bg-zinc-500 rounded-md p-2">03</div>
+                                <div className="col-span-2 h-[200px] bg-zinc-500 rounded-md p-2">04</div>
+                                <div className="h-[200px] bg-zinc-500 rounded-md p-2">05</div>
+                                <div className="h-[200px] bg-zinc-500 rounded-md p-2">06</div>
+                                <div className="h-[200px] bg-zinc-500 rounded-md p-2">07</div>
                             </div>
                         </div>
                     </section>

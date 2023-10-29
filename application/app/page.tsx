@@ -12,7 +12,6 @@ import { Loader } from '../components/loader';
 import { FaGithub, FaLinkedinIn } from "react-icons/fa";
 import { IoSchool } from "react-icons/io5";
 import { SiTailwindcss } from "react-icons/si";
-import { SkillsModale } from "../components/skillsModale"
 
 import WaveBottom from '../public/wave-2.svg';
 
@@ -274,25 +273,6 @@ export default function Home() {
                 ))}
               </div>
             </div>
-
-            {/*
-            <div className="flex items-center justify-center">
-              <svg className="transform -rotate-90 w-72 h-72">
-                <circle
-                  cx="145"
-                  cy="145"
-                  r="120"
-                  stroke="currentColor"
-                  strokeWidth="30"
-                  fill="transparent"
-                  strokeDasharray={circumference}
-                  strokeDashoffset={dashOffset}
-                  className="text-blue-500"
-                />
-              </svg>
-              <span className="absolute text-5xl">{`${progress}%`}</span>
-            </div>
-            */}
 
             <div className='md:flex hidden'>
               <div
