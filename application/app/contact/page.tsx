@@ -12,17 +12,8 @@ const ContactForm = () => {
     const [content, setContent] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
     const [isStylesLoaded, setIsStylesLoaded] = useState(false);
-    const [isSubmitting, setIsSubmitting] = useState(true);
 
-    const [isEmailSent, setIsEmailSent] = useState(false);
-
-    useEffect(() => {
-        if (localStorage.getItem('emailSent')) {
-
-            setIsEmailSent(true);
-            localStorage.removeItem('emailSent'); // Supprimez la clé du sessionStorage après l'avoir utilisée
-        }
-    }, []);
+    const [lastSubmissionTime, setLastSubmissionTime] = useState<number>(0);
 
     useEffect(() => {
         // Marquer les styles comme chargés après un court délai
@@ -42,12 +33,26 @@ const ContactForm = () => {
         setContent(e.target.value);
     };
 
+    useEffect(() => {
+        // Récupérer la dernière heure de soumission à partir du stockage local
+        const storedLastSubmissionTime = localStorage.getItem('lastSubmissionTime');
+        if (storedLastSubmissionTime) {
+            setLastSubmissionTime(Number(storedLastSubmissionTime));
+        }
+    }, []);
+
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
-        if (isSubmitting === false) {
-            return;
-        }
+        const currentTime = Date.now();
+        // Réinitialiser l'erreur
+        setErrorMessage('');
+
+        // Mettez à jour le dernier temps de soumission
+        setLastSubmissionTime(currentTime);
+
+        // Stocker la dernière heure de soumission dans le stockage local
+        localStorage.setItem('lastSubmissionTime', currentTime.toString());
 
         if (!validateForm()) {
             return;
@@ -75,14 +80,9 @@ const ContactForm = () => {
                 setErrorMessage('Message envoyé avec succès !');
                 setEmail('');
                 setContent('');
-                setIsSubmitting(false);
-                localStorage.setItem('emailSent', 'true');
-
             } catch (error) {
                 console.error('Error sending email:', error);
                 setErrorMessage("Un problème technique est survenu lors de l'envoi du message. Contactez moi directement via cet email : lucasperez.dev.pro@gmail.com.");
-            } finally {
-                setIsSubmitting(false);
             }
         }
     };
@@ -141,13 +141,14 @@ const ContactForm = () => {
                                     className='no-resize appearance-none block w-full bg-light-dark/50 text-white border-2 border-gray-500 rounded py-3 px-4 mb-3 mt-4 leading-tight focus:outline-none  focus:border-orange focus:bg-light-dark/20 h-48 resize-none' />
                             </div>
                             {errorMessage && <div className='mb-4 text-orange'>{errorMessage}</div>}
+                            {lastSubmissionTime > 0 && Date.now() - lastSubmissionTime < 60000 && <div className='mb-4 text-orange'>Attendez un moment pour renvoyer un message.</div>}
                             <button
                                 type="submit"
-                                className={isSubmitting === false
+                                className={lastSubmissionTime > 0 && Date.now() - lastSubmissionTime < 60000
                                     ? 'border-2 border-gray-500 rounded-md py-2 px-4 cursor-not-allowed ease-in-out duration-300'
                                     : 'border-2 border-orange rounded-md py-2 px-4 hover:bg-orange hover:text-dark ease-in-out duration-300'
                                 }
-                                disabled={isEmailSent}
+                                disabled={lastSubmissionTime > 0 && Date.now() - lastSubmissionTime < 60000}
                             >
                                 <span className='text-2xl font-semibold'>Envoyer</span>
                             </button>
