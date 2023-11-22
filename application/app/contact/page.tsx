@@ -4,7 +4,7 @@ import Footer from '@/components/footer';
 import { Loader } from '@/components/loader';
 import NavigationBar from '@/components/nav/navigationBar';
 import { motion } from 'framer-motion';
-import { Suspense, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import emailjs from 'emailjs-com';
 
 const ContactForm = () => {
@@ -34,7 +34,6 @@ const ContactForm = () => {
         return () => clearTimeout(timeout);
     }, []);
 
-
     const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setEmail(e.target.value);
     };
@@ -54,33 +53,37 @@ const ContactForm = () => {
             return;
         }
 
-        try {
-            // const response = await fetch('/api/contact', {
-            //     method: 'POST',
-            //     body: JSON.stringify({ email, content }),
-            // });
+        const YOUR_SERVICE_ID = process.env.NEXT_PUBLIC_YOUR_SERVICE_ID;
+        const YOUR_TEMPLATE_ID = process.env.NEXT_PUBLIC_YOUR_TEMPLATE_ID;
+        const YOUR_PUBLIC_KEY = process.env.NEXT_PUBLIC_YOUR_PUBLIC_KEY;
 
-            emailjs.send(
-                'YOUR_SERVICE_ID',
-                'YOUR_TEMPLATE_ID',
-                {
-                    to_email: 'lucasperez.dev.pro@gmail.com',
-                    from_email: email,
-                    message: content,
-                },
-                'YOUR_USER_ID'
-            );
-            setErrorMessage('Message envoyé avec succès !');
-            setEmail('');
-            setContent('');
-            setIsSubmitting(false);
-            localStorage.setItem('emailSent', 'true');
+        if (!YOUR_SERVICE_ID || !YOUR_TEMPLATE_ID || !YOUR_PUBLIC_KEY) {
+            console.error('Les variables d\'environnement ne sont pas définies correctement.');
+            // Gérer l'absence de valeurs, vous pourriez lancer une erreur, fournir des valeurs par défaut, etc.
+        } else {
+            try {
+                emailjs.send(
+                    YOUR_SERVICE_ID,
+                    YOUR_TEMPLATE_ID,
+                    {
+                        to_email: 'lucasperez.dev.pro@gmail.com',
+                        from_email: email,
+                        message: content,
+                    },
+                    YOUR_PUBLIC_KEY
+                );
+                setErrorMessage('Message envoyé avec succès !');
+                setEmail('');
+                setContent('');
+                setIsSubmitting(false);
+                localStorage.setItem('emailSent', 'true');
 
-        } catch (error) {
-            console.error('Error sending email:', error);
-            setErrorMessage("Un problème technique est survenu lors de l'envoi du message. Contactez moi directement via cet email : lucasperez.dev.pro@gmail.com.");
-        } finally {
-            setIsSubmitting(false);
+            } catch (error) {
+                console.error('Error sending email:', error);
+                setErrorMessage("Un problème technique est survenu lors de l'envoi du message. Contactez moi directement via cet email : lucasperez.dev.pro@gmail.com.");
+            } finally {
+                setIsSubmitting(false);
+            }
         }
     };
 
