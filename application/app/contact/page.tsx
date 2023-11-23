@@ -14,6 +14,7 @@ const ContactForm = () => {
     const [isStylesLoaded, setIsStylesLoaded] = useState(false);
 
     const [lastSubmissionTime, setLastSubmissionTime] = useState<number>(0);
+    const [submit, setSubmit] = useState(false);
 
     useEffect(() => {
         // Marquer les styles comme chargés après un court délai
@@ -24,6 +25,23 @@ const ContactForm = () => {
         // Nettoyer le délai d'attente lorsque le composant est démonté
         return () => clearTimeout(timeout);
     }, []);
+
+    useEffect(() => {
+        let timeoutId: string | number | NodeJS.Timeout | undefined;
+
+        if (submit) {
+            // Définir un délai de 60 secondes (en millisecondes)
+            timeoutId = setTimeout(() => {
+                // Votre logique à exécuter après 1 minute
+                console.log('1 minute écoulée après le clic.');
+                // Remettez l'état à son état initial si nécessaire
+                setSubmit(false);
+            }, 60000);
+        }
+
+        // Nettoyez le timeout si le composant est démonté avant l'expiration du délai
+        return () => clearTimeout(timeoutId);
+    }, [submit]);
 
     const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setEmail(e.target.value);
@@ -48,12 +66,6 @@ const ContactForm = () => {
         // Réinitialiser l'erreur
         setErrorMessage('');
 
-        // Mettez à jour le dernier temps de soumission
-        setLastSubmissionTime(currentTime);
-
-        // Stocker la dernière heure de soumission dans le stockage local
-        localStorage.setItem('lastSubmissionTime', currentTime.toString());
-
         if (!validateForm()) {
             return;
         }
@@ -77,6 +89,11 @@ const ContactForm = () => {
                     },
                     YOUR_PUBLIC_KEY
                 );
+                setSubmit(true);
+                // Mettez à jour le dernier temps de soumission
+                setLastSubmissionTime(currentTime);
+                // Stocker la dernière heure de soumission dans le stockage local
+                localStorage.setItem('lastSubmissionTime', currentTime.toString());
                 setErrorMessage('Message envoyé avec succès !');
                 setEmail('');
                 setContent('');
@@ -141,14 +158,14 @@ const ContactForm = () => {
                                     className='no-resize appearance-none block w-full bg-light-dark/50 text-white border-2 border-gray-500 rounded py-3 px-4 mb-3 mt-4 leading-tight focus:outline-none  focus:border-orange focus:bg-light-dark/20 h-48 resize-none' />
                             </div>
                             {errorMessage && <div className='mb-4 text-orange'>{errorMessage}</div>}
-                            {lastSubmissionTime > 0 && Date.now() - lastSubmissionTime < 60000 && <div className='mb-4 text-orange'>Attendez un moment pour renvoyer un message.</div>}
+                            {submit === true || (lastSubmissionTime > 0 && Date.now() - lastSubmissionTime < 60000) && <div className='mb-4 text-orange'>Attendez un moment pour renvoyer un message.</div>}
                             <button
                                 type="submit"
-                                className={lastSubmissionTime > 0 && Date.now() - lastSubmissionTime < 60000
+                                className={submit === true || (lastSubmissionTime > 0 && Date.now() - lastSubmissionTime < 60000)
                                     ? 'border-2 border-gray-500 rounded-md py-2 px-4 cursor-not-allowed ease-in-out duration-300'
                                     : 'border-2 border-orange rounded-md py-2 px-4 hover:bg-orange hover:text-dark ease-in-out duration-300'
                                 }
-                                disabled={lastSubmissionTime > 0 && Date.now() - lastSubmissionTime < 60000}
+                                disabled={submit === true || (lastSubmissionTime > 0 && Date.now() - lastSubmissionTime < 60000)}
                             >
                                 <span className='text-2xl font-semibold'>Envoyer</span>
                             </button>
