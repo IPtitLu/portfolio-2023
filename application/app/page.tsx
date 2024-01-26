@@ -153,7 +153,7 @@ export default function Home() {
                   transition={{ type: "spring", stiffness: 75, delay: 1 }}
                 >
                   <Image
-                    src="/lucas-perez.png"
+                    src="/lucas-perez-2024.png"
                     alt="Lucas Perez"
                     className="w-96 h-auto"
                     width={500}
